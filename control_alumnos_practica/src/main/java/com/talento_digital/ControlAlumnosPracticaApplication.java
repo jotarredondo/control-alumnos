@@ -6,6 +6,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import com.talento_digital.dao.AlumnoDao;
 import com.talento_digital.dao.DireccionDao;
+import com.talento_digital.service.AlumnoServiceImp;
 
 @SpringBootApplication
 public class ControlAlumnosPracticaApplication {
@@ -14,10 +15,11 @@ public class ControlAlumnosPracticaApplication {
 		//SpringApplication.run(ControlAlumnosPracticaApplication.class, args);
 		
 		AnnotationConfigApplicationContext acab = new AnnotationConfigApplicationContext(AppConfig.class);
-		AlumnoDao alumno = acab.getBean(AlumnoDao.class);
+		AlumnoServiceImp alumno = acab.getBean(AlumnoServiceImp.class);
 		DireccionDao direccion = acab.getBean(DireccionDao.class);
 		
-		System.out.println(direccion.findAll());
+		System.out.println(alumno.findAll().getLista());
+		
 		
 	}
 
