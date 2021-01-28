@@ -1,7 +1,7 @@
 package com.talento_digital.entity;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.sql.Date;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -10,7 +10,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -37,6 +36,6 @@ public class Alumno implements Serializable {
 	private int edad;
 	private Date fechaIngreso;
 	@OneToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name = "direccion ", referencedColumnName = "id_direccion")
+	@JoinColumn(name = "direccion", referencedColumnName = "id_direccion")
 	private Direccion direccion;
 }

@@ -34,6 +34,6 @@ public class Direccion implements Serializable {
 	private String ciudad;
 
 	@Enumerated(EnumType.STRING)
-	private Enum tipoDireccion;
+	private Tipo tipoDireccion;
 
 }

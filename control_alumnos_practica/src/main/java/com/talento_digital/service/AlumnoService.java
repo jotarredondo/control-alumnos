@@ -10,8 +10,6 @@ public interface AlumnoService {
 	
 	public AlumnoVO findAll();
 	
-	public AlumnoVO findByid(Integer id);
-	
-	public AlumnoVO agregarDireccion(Direccion direccion);
+	public AlumnoVO agregarDireccion(Integer id,Direccion direccion);
 	
 }

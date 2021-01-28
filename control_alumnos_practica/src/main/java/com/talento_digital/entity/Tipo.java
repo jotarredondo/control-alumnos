@@ -1,6 +1,6 @@
 package com.talento_digital.entity;
 
-public enum Enum {
+public enum Tipo {
 	
 	CASA,TRABAJO,OTRO
 
