@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<meta charset="UTF-8">
+<title>Index</title>
+
+<!--CSS de Bootstrap 4.2.1-->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
+	crossorigin="anonymous">
+
+</head>
+<body>
+
+	<nav class="navbar navbar-expand-lg navbar-info bg-info fixed-top col-sm-12">
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarNav" aria-controls="navbarNav"
+			aria-expanded="false" aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarNav">
+			<ul class="navbar-nav ml-auto ">
+				<li class="nav-item m-auto px-2">
+					<form action="/alumnos" method="get"
+						class="text-align-center">
+						<button type="submit" class="btn btn-transparent">Alumnos</button>
+					</form>
+				</li>
+
+				<li class="nav-item m-auto px-2">
+					<form action="/direcciones" method="get"
+						class="text-align-center">
+						<button type="submit" class="btn btn-transparent">Direcciones</button>
+					</form>
+				</li>
+
+				<li class="nav-item m-auto px-2">
+					<form action="crearAlumno" method="get" class="text-align-center">
+						<button type="submit" class="btn btn-transparent">Nuevo
+							Alumno</button>
+					</form>
+				</li>
+
+				<li class="nav-item m-auto px-2">
+					<form action="crearDireccion" method="get"
+						class="text-align-center">
+						<button type="submit" class="btn btn-transparent">Nueva
+							Direccion</button>
+					</form>
+				</li>
+			</ul>
+		</div>
+	</nav>
+
+	<div class="my-5"></div>
+
+	<div class="container px-5 shadow rounded">
+		<table class="table table-borderless">
+			<thead>
+				<tr>
+					<th scope="col"><h5>Calle</h5></th>
+					<th scope="col"><h5>Numero</h5></th>
+					<th scope="col"><h5>Ciudad</h5></th>
+					<th scope="col"><h5>Tipo</h5></th>
+				</tr>
+			</thead>
+
+			<tbody>
+					<tr th:each="direccion: ${lista}">
+					<td th:text="${direccion.calle}"></td>
+					<td th:text="${direccion.numero}"></td>
+					<td th:text="${direccion.ciudad}"></td>
+					<td th:text="${direccion.tipoDireccion}"></td>
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+
+
+</body>
+</html>

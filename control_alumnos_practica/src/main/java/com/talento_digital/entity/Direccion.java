@@ -34,6 +34,7 @@ public class Direccion implements Serializable {
 	private String ciudad;
 
 	@Enumerated(EnumType.STRING)
+	@Column(name="tipo_direccion")
 	private Tipo tipoDireccion;
 
 }
