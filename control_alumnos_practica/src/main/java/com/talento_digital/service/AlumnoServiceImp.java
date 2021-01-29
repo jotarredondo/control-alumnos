@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.talento_digital.VO.AlumnoVO;
+import com.talento_digital.VO.DireccionVO;
 import com.talento_digital.dao.AlumnoDao;
 import com.talento_digital.entity.Alumno;
 import com.talento_digital.entity.Direccion;
@@ -68,7 +69,5 @@ public class AlumnoServiceImp implements AlumnoService {
 		}
 		return alumnoVo;
 	}
-	
-	
 
 }

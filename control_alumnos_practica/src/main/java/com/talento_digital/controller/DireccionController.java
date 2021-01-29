@@ -1,5 +1,6 @@
 package com.talento_digital.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,23 @@ public class DireccionController {
 	@GetMapping("/direcciones")
 	public String direcciones(ModelMap model) {
 		
-		List<Direccion> lista = direccionServicio.findAll().getLista();
+		List<Direccion> direcciones = direccionServicio.findAll().getLista();
 		
-		model.addAttribute("lista", lista);
-		
+		List<Direccion> filtrada = new ArrayList<Direccion>();
+
+		for (Direccion direccion : direcciones) {
+			if(direccion.getAlumno() == null) {
+				
+				filtrada.add(direccion);
+				model.addAttribute("filtrada", direcciones);
+				model.addAttribute("direcciones", direcciones);
+				return "direccion";
+			}
+			
+			
+			
+		}
+		model.addAttribute("direcciones", direcciones);
 		return "direccion";
 	}
 

@@ -9,6 +9,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -36,5 +37,8 @@ public class Direccion implements Serializable {
 	@Enumerated(EnumType.STRING)
 	@Column(name="tipo_direccion")
 	private Tipo tipoDireccion;
+	
+	@OneToOne(mappedBy = "direccion")
+    private Alumno alumno;
 
 }

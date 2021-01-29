@@ -4,11 +4,13 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 
+
 @SpringBootApplication
 public class ControlAlumnosPracticaApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(ControlAlumnosPracticaApplication.class, args);
+		
 		
 //		AnnotationConfigApplicationContext acab = new AnnotationConfigApplicationContext(AppConfig.class);
 //		AlumnoServiceImp alumno = acab.getBean(AlumnoServiceImp.class);

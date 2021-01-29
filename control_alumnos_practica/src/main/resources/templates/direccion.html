@@ -70,7 +70,7 @@
 			</thead>
 
 			<tbody>
-					<tr th:each="direccion: ${lista}">
+					<tr th:each="direccion: ${direcciones}">
 					<td th:text="${direccion.calle}"></td>
 					<td th:text="${direccion.numero}"></td>
 					<td th:text="${direccion.ciudad}"></td>
@@ -80,6 +80,7 @@
 			</tbody>
 		</table>
 	</div>
+
 
 
 </body>

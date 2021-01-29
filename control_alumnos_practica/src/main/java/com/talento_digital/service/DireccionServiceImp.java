@@ -2,6 +2,8 @@ package com.talento_digital.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,7 +25,6 @@ public class DireccionServiceImp implements DireccionService {
 	
 	
 	@Override
-	@Transactional
 	public DireccionVO save(Direccion direccion) {
 		direccionVo = new DireccionVO("No se puede agregar el registro", "0", new ArrayList<Direccion>());
 		try {
@@ -38,7 +39,6 @@ public class DireccionServiceImp implements DireccionService {
 	}
 
 	@Override
-	@Transactional(readOnly = true)
 	public DireccionVO findAll() {
 		
 		direccionVo = new DireccionVO("No se puede listar los registros", "0", new ArrayList<Direccion>());
@@ -51,5 +51,8 @@ public class DireccionServiceImp implements DireccionService {
 		}
 		return direccionVo;
 	}
+	
 
+	
+	
 }
