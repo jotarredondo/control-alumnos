@@ -12,4 +12,6 @@ public interface AlumnoService {
 	
 	public AlumnoVO agregarDireccion(Integer id,Direccion direccion);
 	
+	public String fecha();
+	
 }

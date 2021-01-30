@@ -1,7 +1,10 @@
 package com.talento_digital.service;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,5 +72,13 @@ public class AlumnoServiceImp implements AlumnoService {
 		}
 		return alumnoVo;
 	}
-
+	
+	@Override
+	public String fecha() {
+	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+	Date fecha = new Date();
+	String fechaCadena = sdf.format(fecha);
+	
+	return fechaCadena;
+}
 }

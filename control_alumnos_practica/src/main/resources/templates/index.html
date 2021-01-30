@@ -134,7 +134,7 @@
 							</div>
 
 							<div class="modal-footer">
-								<button type="submit" class="btn btn-primary">Agregar Libro</button>
+								<button type="submit" class="btn btn-primary">Agregar Alumno</button>
 							</div>
 						</form>
 					</div>
@@ -156,7 +156,7 @@
 						</button>
 					</div>
 					<div class="modal-body">
-						<form action="/agregarDireccion" method="post" modelAttribute="DireccionNueva">
+						<form action="/agregarDireccion" method="post" modelAttribute="direccionNueva">
 							<div class="form-group">
 								<label for="calle">Calle</label> <input type="text"
 									class="form-control" name="Calle"
@@ -188,14 +188,14 @@
 							</div>
 							<div>
 								<br>
-					 			<select name="direccion" required>
-                    			<option th:each="variable: ${direcciones}" th:value="${variable.idDireccion}" th:text="${variable.calle}"/>
+					 			<select class="custom-select" id="inputGroupSelect01" name="direccion" >
+                    			<option th:each="variable: ${filtrada}" th:value="${variable.rut}" th:text="${variable.nombre}"/>
                      			</select>
 							</div>
 							
 
 							<div class="modal-footer">
-								<button type="submit" class="btn btn-primary">Agregar Libro</button>
+								<button type="submit" class="btn btn-primary">Agregar Direccion</button>
 							</div>
 						</form>
 					</div>

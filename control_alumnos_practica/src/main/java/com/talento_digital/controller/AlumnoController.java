@@ -1,6 +1,7 @@
 package com.talento_digital.controller;
 
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -30,36 +31,41 @@ public class AlumnoController {
 	private String mensaje = null;
 	private Alumno alumno = new Alumno();
 	
-	// método que envía la fecha actual
-		public String fecha() {
-		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-		Date fecha = new Date();
-		String fechaCadena = sdf.format(fecha);
-		
-		return fechaCadena;
-	}
-	
 	@GetMapping("/")
 	public String index(ModelMap model) {
 		
-		model.addAttribute("fecha",fecha());
+		model.addAttribute("fecha",servicio.fecha());
 		return "index";
 	}
 	
 	@GetMapping("/alumnos")
 	public String alumnos(ModelMap model) {
 		
-		List<Alumno> lista = servicio.findAll().getLista();
-
-		model.addAttribute("lista", lista);
-		model.addAttribute("fecha",fecha());
+		List<Alumno> alumnos = servicio.findAll().getLista();
+		
+		List<Direccion> direcciones = direccionServicio.findAll().getLista();
+		
+		List<Alumno> filtrada = new ArrayList<Alumno>();
+		
+		for (Alumno alumnoTemp : alumnos) {
+				
+			if(alumnoTemp.getDireccion() == null) {
+				
+				filtrada.add(alumnoTemp);
+			}
+		}
+		
+		model.addAttribute("filtrada", filtrada);
+		model.addAttribute("direcciones", direcciones);
+		model.addAttribute("lista", servicio.findAll().getLista());
+		model.addAttribute("fecha",servicio.fecha());
 		return "index";
 	}
 	
 	@PostMapping("/agregar")
 	public String agregar(ModelMap model,RedirectAttributes flash, @ModelAttribute Alumno alumnoNuevo) {
 		
-		alumnoNuevo.setFechaIngreso(fecha());
+		alumnoNuevo.setFechaIngreso(servicio.fecha());
 		AlumnoVO temp = servicio.save(alumnoNuevo);
 		
 		if (temp.getCodigo().equals("0")) {
@@ -68,10 +74,11 @@ public class AlumnoController {
 		}
 		
 		mensaje = "El alumno se registró exitosamente en la base de datos";
-		List<Alumno> lista = servicio.findAll().getLista();
+		
 
 		model.addAttribute("mensaje", mensaje);
-		model.addAttribute("lista", lista);
+		model.addAttribute("direcciones", direccionServicio.findAll().getLista());
+		model.addAttribute("lista", servicio.findAll().getLista());
 		return "redirect:/alumnos";
 	}
 
