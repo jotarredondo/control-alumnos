@@ -38,14 +38,16 @@ public class AlumnoController {
 		return "index";
 	}
 	
-	@GetMapping("/alumnos")
-	public String alumnos(ModelMap model) {
+	@PostMapping("/alumnos")
+	public String alumnos(ModelMap model, RedirectAttributes flash) {
 		
 		List<Alumno> alumnos = servicio.findAll().getLista();
 		
 		List<Direccion> direcciones = direccionServicio.findAll().getLista();
 		
 		List<Alumno> filtrada = new ArrayList<Alumno>();
+		
+		List<Direccion> filtradaD = new ArrayList<Direccion>();
 		
 		for (Alumno alumnoTemp : alumnos) {
 				
@@ -54,12 +56,18 @@ public class AlumnoController {
 				filtrada.add(alumnoTemp);
 			}
 		}
+		for (Direccion direccionTemp : direcciones) {
+			if(direccionTemp.getAlumno() == null) {
+				filtradaD.add(direccionTemp);
+			}
+		}
 		
+		model.addAttribute("filtradaD", filtradaD);
 		model.addAttribute("filtrada", filtrada);
 		model.addAttribute("direcciones", direcciones);
 		model.addAttribute("lista", servicio.findAll().getLista());
 		model.addAttribute("fecha",servicio.fecha());
-		return "index";
+		return "alumnos";
 	}
 	
 	@PostMapping("/agregar")
@@ -79,7 +87,7 @@ public class AlumnoController {
 		model.addAttribute("mensaje", mensaje);
 		model.addAttribute("direcciones", direccionServicio.findAll().getLista());
 		model.addAttribute("lista", servicio.findAll().getLista());
-		return "redirect:/alumnos";
+		return "index";
 	}
 
 }

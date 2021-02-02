@@ -57,24 +57,35 @@
 		<table class="table table-borderless">
 			<thead>
 				<tr>
-					<th scope="col"><h5>Calle</h5></th>
-					<th scope="col"><h5>Numero</h5></th>
-					<th scope="col"><h5>Ciudad</h5></th>
-					<th scope="col"><h5>Tipo</h5></th>
+					<th scope="col"><h5>Rut</h5></th>
+					<th scope="col"><h5>Nombre</h5></th>
+					<th scope="col"><h5>Apellido</h5></th>
+					<th scope="col"><h5>Email</h5></th>
+					<th scope="col"><h5>Edad</h5></th>
+					<th scope="col"><h5>Fecha de Ingreso</h5></th>
+					<th scope="col"><h5>Ciudad de residencia</h5></th>
 				</tr>
 			</thead>
 
 			<tbody>
-					<tr th:each="direccion: ${direcciones}">
-					<td th:text="${direccion.calle}"></td>
-					<td th:text="${direccion.numero}"></td>
-					<td th:text="${direccion.ciudad}"></td>
-					<td th:text="${direccion.tipoDireccion}"></td>
+
+				<tr th:each="alumno: ${lista}">
+					<td th:text="${alumno.rut}"></td>
+					<td th:text="${alumno.nombre}"></td>
+					<td th:text="${alumno.apellido}"></td>
+					<td th:text="${alumno.email}"></td>
+					<td th:text="${alumno.edad}"></td>
+					<td th:text="${alumno.fechaIngreso}"></td>
+					<td>
+						<p th:each="variable: ${alumno.direccion}"
+							th:text="${variable.getCiudad()}" />
+					</td>
 				</tr>
 
 			</tbody>
 		</table>
 	</div>
+
 
 		<!-- Modal Agregar Alumno-->
 		<div class="modal fade" id="agregarAlumno" tabindex="-1" role="dialog"
@@ -195,7 +206,7 @@
 				</div>
 			</div>
 		</div>		
-
+		
 	<!--jQuery 3.3.1 sin slim-->
 	<script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
 
@@ -203,7 +214,7 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
 
 	<!--Bootstrap JS 4.2.1-->
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>		
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
 
 
 </body>

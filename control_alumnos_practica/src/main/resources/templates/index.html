@@ -25,14 +25,14 @@
 		<div class="collapse navbar-collapse" id="navbarNav">
 			<ul class="navbar-nav ml-auto ">
 				<li class="nav-item m-auto px-2">
-					<form action="/alumnos" method="get"
+					<form action="/alumnos" method="post"
 						class="text-align-center">
 						<button type="submit" class="btn btn-transparent">Alumnos</button>
 					</form>
 				</li>
 
 				<li class="nav-item m-auto px-2">
-					<form action="/direcciones" method="get"
+					<form action="/direccion" method="post"
 						class="text-align-center">
 						<button type="submit" class="btn btn-transparent">Direcciones</button>
 					</form>
@@ -53,47 +53,13 @@
 
 	<div class="my-5"></div>
 
-	<div class="container px-5 shadow rounded">
-		<table class="table table-borderless">
-			<thead>
-				<tr>
-					<th scope="col"><h5>Rut</h5></th>
-					<th scope="col"><h5>Nombre</h5></th>
-					<th scope="col"><h5>Apellido</h5></th>
-					<th scope="col"><h5>Email</h5></th>
-					<th scope="col"><h5>Edad</h5></th>
-					<th scope="col"><h5>Fecha de Ingreso</h5></th>
-					<th scope="col"><h5>Ciudad de residencia</h5></th>
-				</tr>
-			</thead>
-
-			<tbody>
-
-				<tr th:each="alumno: ${lista}">
-					<td th:text="${alumno.rut}"></td>
-					<td th:text="${alumno.nombre}"></td>
-					<td th:text="${alumno.apellido}"></td>
-					<td th:text="${alumno.email}"></td>
-					<td th:text="${alumno.edad}"></td>
-					<td th:text="${alumno.fechaIngreso}"></td>
-					<td>
-						<p th:each="variable: ${alumno.direccion}"
-							th:text="${variable.getCiudad()}" />
-					</td>
-				</tr>
-
-			</tbody>
-		</table>
-	</div>
-
-
 		<!-- Modal Agregar Alumno-->
 		<div class="modal fade" id="agregarAlumno" tabindex="-1" role="dialog"
 			aria-labelledby="exampleModalLabel" aria-hidden="true">
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Agregar Libro</h5>
+						<h5 class="modal-title" id="exampleModalLabel">Agregar Alumno</h5>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
@@ -132,6 +98,13 @@
 									th:value="${fecha}"
 									disabled>
 							</div>
+							<div>
+								<h5 class="primer text-center">Direccion</h5> 
+								<br>
+					 			<select class="custom-select" id="inputGroupSelect01" name="direccion" >
+                    			<option th:each="variable: ${filtradaD}" th:value="${variable.idDireccion}" th:text="${variable.calle} +' ' + ${variable.numero} + ' ' + ${variable.ciudad}"/>
+                     			</select>
+							</div>
 
 							<div class="modal-footer">
 								<button type="submit" class="btn btn-primary">Agregar Alumno</button>
@@ -149,7 +122,7 @@
 			<div class="modal-dialog">
 				<div class="modal-content">
 					<div class="modal-header">
-						<h5 class="modal-title" id="exampleModalLabel">Agregar Libro</h5>
+						<h5 class="modal-title" id="exampleModalLabel">Agregar Direccion</h5>
 						<button type="button" class="close" data-dismiss="modal"
 							aria-label="Close">
 							<span aria-hidden="true">&times;</span>
@@ -187,9 +160,10 @@
 									</select>
 							</div>
 							<div>
+								<h5 class="primer text-center">Alumno</h5> 
 								<br>
-					 			<select class="custom-select" id="inputGroupSelect01" name="direccion" >
-                    			<option th:each="variable: ${filtrada}" th:value="${variable.rut}" th:text="${variable.nombre}"/>
+					 			<select class="custom-select" id="inputGroupSelect01" name="alumno" >
+                    			<option th:each="variable: ${filtrada}" th:value="${variable.idAlumno}" th:text="${variable.nombre} +' ' + ${variable.apellido}"/>
                      			</select>
 							</div>
 							

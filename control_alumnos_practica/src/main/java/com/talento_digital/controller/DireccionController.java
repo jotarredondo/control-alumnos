@@ -29,28 +29,56 @@ public class DireccionController {
 	private String mensaje = null;
 	
 	
-	@GetMapping("/direcciones")
-	public String direcciones(ModelMap model) {
+	@PostMapping("/direccion")
+	public String direccion(ModelMap model, RedirectAttributes flash) {
+		
+		List<Alumno> alumnos = servicio.findAll().getLista();
 		
 		List<Direccion> direcciones = direccionServicio.findAll().getLista();
 		
-		List<Direccion> filtrada = new ArrayList<Direccion>();
-
-		for (Direccion direccion : direcciones) {
-			if(direccion.getAlumno() == null) {
-				filtrada.add(direccion);
-			}		
+		List<Alumno> filtrada = new ArrayList<Alumno>();
+		
+		List<Direccion> filtradaD = new ArrayList<Direccion>();
+		
+		for (Alumno alumnoTemp : alumnos) {
+				
+			if(alumnoTemp.getDireccion() == null) {
+				
+				filtrada.add(alumnoTemp);
+			}
 		}
+		for (Direccion direccionTemp : direcciones) {
+			if(direccionTemp.getAlumno() == null) {
+				filtradaD.add(direccionTemp);
+			}
+		}
+		
+		model.addAttribute("filtradaD", filtradaD);
 		model.addAttribute("filtrada", filtrada);
 		model.addAttribute("direcciones", direcciones);
-		model.addAttribute("lista", servicio.findAll().getLista());
+		model.addAttribute("lista", alumnos);
+		model.addAttribute("fecha",servicio.fecha());
 		return "direccion";
 	}
 	
 	@PostMapping("/agregarDireccion")
-	public String agregarDireccion(ModelMap model, RedirectAttributes flash,@ModelAttribute Direccion direccionNueva ) {
+	public String agregarDireccion(ModelMap model, RedirectAttributes flash,@ModelAttribute Direccion direccionNueva) {
 		
-		DireccionVO temp = direccionServicio.save(direccionNueva);
+		DireccionVO temp = null;
+		
+		if(direccionNueva.getAlumno() == null) {
+			temp = direccionServicio.save(direccionNueva);
+			
+			model.addAttribute("mensaje", mensaje);
+			model.addAttribute("direcciones", direccionServicio.findAll().getLista());
+			model.addAttribute("lista", servicio.findAll().getLista());
+			return "index";
+		}
+	
+		Alumno alumnoTemp = direccionNueva.getAlumno();
+		servicio.agregarDireccion(alumnoTemp.getIdAlumno(), direccionNueva);
+		temp = direccionServicio.save(direccionNueva);
+		
 		if (temp.getCodigo().equals("0")) {
 			mensaje = "La direccion no pudo ser registrado, intente en otro momento";
 			return "index";
@@ -58,9 +86,10 @@ public class DireccionController {
 		
 		mensaje = "La dirección se se registró exitosamente en la base de datos";
 		
+		model.addAttribute("mensaje", mensaje);
 		model.addAttribute("direcciones", direccionServicio.findAll().getLista());
 		model.addAttribute("lista", servicio.findAll().getLista());
-		return "redirect:/direcciones";
+		return "index";
 	}
 	
 
